@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AlumniConnect</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo">Alumni<span class="logo-accent">Connect</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="alumni.html">Alumni</a>
+    <a href="messages.html">Messages <span id="msgBadge" class="msg-badge" style="display:none"></span></a>
+    <div class="nav-user" id="navUser" style="display:none">
+      <div class="nav-avatar" id="navAvatar"></div>
+      <span id="navUserName"></span>
+      <button class="logout-btn" onclick="logout()">Log out</button>
+    </div>
+    <button class="btn btn-small" id="navLoginBtn" onclick="openLoginModal()">Log In</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <h2>Connect with Alumni.<br>Learn from Experience.</h2>
+    <p>Your gateway to mentorship and career guidance from people who've been where you're headed.</p>
+    <div class="hero-buttons" id="heroButtons">
+      <button class="btn" onclick="requireLogin(event)">Browse Alumni</button>
+      <button class="btn secondary" onclick="openLoginModal()">Log In to Get Started</button>
+    </div>
+    <div class="hero-welcome" id="heroWelcome" style="display:none">
+      <a href="alumni.html" class="btn">Browse Alumni</a>
+      <a href="messages.html" class="btn secondary">View Messages</a>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="card">
+    <div class="card-icon">🔍</div>
+    <h3>Browse Alumni</h3>
+    <p>Explore alumni profiles across industries, filtered by degree, skill, and availability.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon">✉️</div>
+    <h3>Send Messages</h3>
+    <p>Reach out directly for mentorship — available alumni are ready to help.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon">💡</div>
+    <h3>Get Insights</h3>
+    <p>Learn from real-world experiences and navigate your career with confidence.</p>
+  </div>
+</section>
+
+<section class="stats">
+  <div><strong>6+</strong><span>Alumni</span></div>
+  <div><strong>5</strong><span>Industries</span></div>
+  <div><strong>Free</strong><span>To Use</span></div>
+</section>
+
+<!-- Login / Signup Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content login-modal-content">
+    <button class="modal-close" onclick="closeLoginModal()">✕</button>
+
+    <!-- Login View -->
+    <div id="loginView">
+      <div class="login-logo">Alumni<span class="logo-accent">Connect</span></div>
+      <h3>Welcome back</h3>
+      <p class="login-sub">Log in to access mentorship and messaging.</p>
+
+      <label class="field-label">Full Name</label>
+      <input type="text" id="loginName" placeholder="Jane Smith" onkeydown="if(event.key==='Enter')handleLogin()">
+      <div class="field-error" id="loginNameError"></div>
+
+      <label class="field-label">Email</label>
+      <input type="email" id="loginEmail" placeholder="jane@example.com" onkeydown="if(event.key==='Enter')handleLogin()">
+      <div class="field-error" id="loginEmailError"></div>
+
+      <label class="field-label">Password</label>
+      <div class="password-wrap">
+        <input type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter')handleLogin()">
+        <button class="show-pw-btn" onclick="togglePassword('loginPassword', this)">Show</button>
+      </div>
+      <div class="field-error" id="loginPasswordError"></div>
+
+      <button class="btn login-submit-btn" onclick="handleLogin()">Log In</button>
+      <p class="login-switch">Don't have an account? <a href="#" onclick="switchToSignup(); return false;">Sign up</a></p>
+    </div>
+
+    <!-- Signup View -->
+    <div id="signupView" style="display:none">
+      <div class="login-logo">Alumni<span class="logo-accent">Connect</span></div>
+      <h3>Create an account</h3>
+      <p class="login-sub">Join the network and start connecting.</p>
+
+      <label class="field-label">Full Name</label>
+      <input type="text" id="signupName" placeholder="Jane Smith" onkeydown="if(event.key==='Enter')handleSignup()">
+      <div class="field-error" id="signupNameError"></div>
+
+      <label class="field-label">Email</label>
+      <input type="email" id="signupEmail" placeholder="jane@example.com" onkeydown="if(event.key==='Enter')handleSignup()">
+      <div class="field-error" id="signupEmailError"></div>
+
+      <label class="field-label">Password</label>
+      <div class="password-wrap">
+        <input type="password" id="signupPassword" placeholder="Min. 6 characters" onkeydown="if(event.key==='Enter')handleSignup()">
+        <button class="show-pw-btn" onclick="togglePassword('signupPassword', this)">Show</button>
+      </div>
+      <div class="field-error" id="signupPasswordError"></div>
+
+      <button class="btn login-submit-btn" onclick="handleSignup()">Create Account</button>
+      <p class="login-switch">Already have an account? <a href="#" onclick="switchToLogin(); return false;">Log in</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Messages – AlumniConnect</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo">Alumni<span class="logo-accent">Connect</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="alumni.html">Alumni</a>
+    <a href="messages.html">Messages <span id="msgBadge" class="msg-badge" style="display:none"></span></a>
+    <div class="nav-user" id="navUser" style="display:none">
+      <div class="nav-avatar" id="navAvatar"></div>
+      <span id="navUserName"></span>
+      <button class="logout-btn" onclick="logout()">Log out</button>
+    </div>
+    <button class="btn btn-small" id="navLoginBtn" onclick="window.location.href='index.html'">Log In</button>
+  </nav>
+</header>
+
+<!-- Auth gate overlay -->
+<div id="authGate" class="auth-gate" style="display:none">
+  <div class="auth-gate-box">
+    <div class="login-logo">Alumni<span class="logo-accent">Connect</span></div>
+    <h2>Log in to view messages</h2>
+    <p>Create a free account or log in to send and view your messages.</p>
+    <a href="index.html" class="btn">Go to Login</a>
+  </div>
+</div>
+
+<!-- Main content (hidden until auth confirmed) -->
+<div id="mainContent" style="display:none">
+  <div class="messages-page-header">
+    <h2>Messages</h2>
+    <button class="btn btn-outline btn-small" onclick="clearAllMessages()">Clear All</button>
+  </div>
+
+  <div id="emptyState" class="empty-state">
+    📭
+    <h2>No messages yet</h2>
+    <p>Messages you send to alumni will appear here.</p>
+    <a href="alumni.html" class="btn" style="margin-top: 16px; display: inline-block;">Browse Alumni</a>
+  </div>
+
+  <div id="messagesList" class="messages-list" style="display:none;"></div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

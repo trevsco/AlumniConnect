@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alumni Directory – AlumniConnect</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo">Alumni<span class="logo-accent">Connect</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="alumni.html">Alumni</a>
+    <a href="messages.html">Messages <span id="msgBadge" class="msg-badge" style="display:none"></span></a>
+    <div class="nav-user" id="navUser" style="display:none">
+      <div class="nav-avatar" id="navAvatar"></div>
+      <span id="navUserName"></span>
+      <button class="logout-btn" onclick="logout()">Log out</button>
+    </div>
+    <button class="btn btn-small" id="navLoginBtn" onclick="window.location.href='index.html'">Log In</button>
+  </nav>
+</header>
+
+<!-- Auth gate overlay -->
+<div id="authGate" class="auth-gate" style="display:none">
+  <div class="auth-gate-box">
+    <div class="login-logo">Alumni<span class="logo-accent">Connect</span></div>
+    <h2>Log in to browse alumni</h2>
+    <p>Create a free account or log in to access the alumni directory and send messages.</p>
+    <a href="index.html" class="btn">Go to Login</a>
+  </div>
+</div>
+
+<!-- Main content (hidden until auth confirmed) -->
+<div id="mainContent" style="display:none">
+  <section class="filters">
+    <input type="text" id="searchInput" placeholder="Search by name, role, company, skill…">
+    <select id="degreeFilter">
+      <option value="">All Degrees</option>
+      <option>Computer Science</option>
+      <option>Business Administration</option>
+      <option>Marketing</option>
+      <option>Electrical Engineering</option>
+      <option>Psychology</option>
+      <option>Finance</option>
+    </select>
+    <select id="sortSelect">
+      <option value="">Sort By</option>
+      <option value="name-asc">Name A–Z</option>
+      <option value="name-desc">Name Z–A</option>
+      <option value="year-desc">Newest Graduates</option>
+      <option value="year-asc">Oldest Graduates</option>
+    </select>
+    <label class="available-toggle">
+      <input type="checkbox" id="availableFilter">
+      <span>Available only</span>
+    </label>
+  </section>
+
+  <p id="resultCount" class="result-count"></p>
+  <section id="alumniGrid" class="alumni-grid"></section>
+</div>
+
+<!-- Profile Modal -->
+<div id="profileModal" class="modal">
+  <div class="modal-content profile-modal-content">
+    <button class="modal-close" onclick="closeProfile()">✕</button>
+    <div class="profile-header">
+      <img id="profilePhoto" src="" alt="">
+      <div>
+        <h2 id="profileName"></h2>
+        <p id="profileRole" class="role-line"></p>
+        <p id="profileMeta" class="meta-line"></p>
+        <span id="profileStatus" class="profile-status"></span>
+      </div>
+    </div>
+    <p id="profileBio" class="profile-bio"></p>
+    <div class="profile-skills-label">Skills</div>
+    <div id="profileSkills" class="skills"></div>
+    <div class="modal-actions" style="margin-top: 24px;">
+      <button onclick="closeProfile()" class="btn btn-outline">Close</button>
+      <button id="profileMessageBtn" class="btn">Send Message</button>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Send Message</h3>
+    <p id="modalRecipient" class="modal-recipient"></p>
+
+    <label class="field-label">Your Name</label>
+    <input type="text" id="senderName" placeholder="Jane Smith">
+    <div class="field-error" id="nameError"></div>
+
+    <label class="field-label">Your Email</label>
+    <input type="email" id="senderEmail" placeholder="jane@example.com">
+    <div class="field-error" id="emailError"></div>
+
+    <label class="field-label">Message</label>
+    <textarea id="messageBox" maxlength="250" placeholder="Hi! I'd love to connect about…"></textarea>
+    <div class="field-error" id="messageError"></div>
+    <small class="char-counter"><span id="charCount">0</span>/250</small>
+
+    <div class="modal-actions">
+      <button onclick="closeModal()" class="btn btn-outline">Cancel</button>
+      <button onclick="sendMessage()" class="btn">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
